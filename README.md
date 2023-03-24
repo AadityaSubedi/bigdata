@@ -1,10 +1,11 @@
-**Our TODO app**
+#Our TODO app
 _Using MongoDB and Elastic Search_
 
-Demo:
+**Demo:**
+<br>
 ![GIF of our demo](./Asset/Demo.gif)
 
-Steps:
+**Steps:**
 
 - ```bash
   git clone https://github.com/AadityaSubedi/bigdata.git
@@ -20,7 +21,7 @@ Steps:
 
 Contributed by:
 
-- 075BCT001(Aaditya Subedi) @AadityaSubedi
-- 075BCT014(Arpan Gyawali) (@ArpanGyawali)
-- 075BCT018(Bidhan Khatiwada) [](localhost:5000)
-- 075BCT020(Bijay Shrestha) [](localhost:5000)
+- 075BCT001(Aaditya Subedi)
+- 075BCT014(Arpan Gyawali)
+- 075BCT018(Bidhan Khatiwada)
+- 075BCT020(Bijay Shrestha)
