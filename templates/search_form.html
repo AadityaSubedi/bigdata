@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Search Todos</title>
-</head>
-<body>
-    <h1>Search Todos</h1>
-    <form action="/search" method="POST">
-        <label for="query">Search Query:</label>
-        <input type="text" name="query" id="query">
-        <br>
-        <button type="submit">Search</button>
-    </form>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Search Todos</title>
+	</head>
+	<body>
+		<h1>Search Todos</h1>
+		<form action="/search" method="POST">
+			<label for="query">Search Query:</label>
+			<input
+				type="text"
+				name="query"
+				,
+				placeholder="Search By Day"
+				id="query"
+			/>
+			<br />
+			<button type="submit">Search</button>
+			<button
+				type="reset"
+				onclick="location.href='http://localhost:5000/add_todo'"
+			>
+				Add TODO
+			</button>
+		</form>
+	</body>
 </html>

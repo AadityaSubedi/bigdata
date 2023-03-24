@@ -4,6 +4,7 @@ from flask import Flask, redirect, render_template, request
 from pymongo import MongoClient
 from json import loads
 from bson.json_util import dumps
+from bson.objectid import ObjectId
 # Create a Flask app
 app = Flask(__name__)
 
@@ -17,8 +18,14 @@ collection = db["todo_collection"]
 # create an Elasticsearch object
 es = Elasticsearch(
     hosts=["http://localhost:9200"], # specify the host and port of your Elasticsearch instance
-    basic_auth=('aaditya', 'aaditya'), # provide your username and password for authentication
+    basic_auth=('arpanuu', 'gyawali'), # provide your username and password for authentication
 )
+
+# Define a route to add a new todo
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    # Render the add todo form template
+    return render_template('home.html')
 
 # Define a route to add a new todo
 @app.route('/add_todo', methods=['GET', 'POST'])
@@ -33,13 +40,16 @@ def add_todo():
         # Insert the todo into MongoDB
         todo = {"title": title, "time_allocated": time_allocated, "tags": tags, "day": day}
         collection.insert_one(todo)
+        todo_id = todo["_id"]
+        del todo["_id"]
         todo =loads(dumps(todo))
         
         
         # Index the todo in ElasticSearch
-        es.index(index="todos", document=todo, id=1)
+        es.index(index="todos", body=todo, id = todo_id)
 
         # Redirect to the home page
+        # return redirect('/add_todo')
         return redirect('/')
 
     # Render the add todo form template
@@ -51,18 +61,25 @@ def search():
     if request.method == 'POST':
         # Get the search query from the user
         query = request.form['query']
+        tag = request.form['search_type']
 
         # Search for the query in ElasticSearch
-        results = es.search(index="todos", body={"query": {"match": {"day": query}}})
+        if (tag == 'day'):
+            results = es.search(index="todos", body={"query": {"match": {"day": query}}})
+        else:
+            results = es.search(index="todos", body={"query": {"match": {"tags": query}}})
+        print(results)
 
         # Get the ids of the matching todos
-        ids = [hit['_id'] for hit in results['hits']['hits']]
+        ids = [ObjectId(hit['_id']) for hit in results['hits']['hits']]
+        print(ids)
 
         # Get the matching todos from MongoDB
         todos = collection.find({"_id": {"$in": ids}})
+        todos = loads(dumps(todos))
 
         # Render the search results template
-        return render_template('search_results.html', todos=todos)
+        return render_template('home.html', todos=todos, search = True)
 
     # Render the search form template
     return render_template('search_form.html')

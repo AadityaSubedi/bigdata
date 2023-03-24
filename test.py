@@ -1,10 +1,15 @@
+
+
 from datetime import datetime
 from elasticsearch import Elasticsearch
 
 es = Elasticsearch(
     hosts=["http://localhost:9200"], # specify the host and port of your Elasticsearch instance
-    basic_auth=('aaditya', 'aaditya'), # provide your username and password for authentication
+    basic_auth=('arpanuu', 'gyawali'), # provide your username and password for authentication
 )
+
+es.indices.delete(index="todos")
+exit()
 
 doc = {
     'author': 'kimchy',
