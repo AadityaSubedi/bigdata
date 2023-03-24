@@ -20,7 +20,7 @@ Steps:
 
 Contributed by:
 
-- 075BCT001(Aaditya Subedi)
-- 075BCT014(Arpan Gyawali)
-- 075BCT018(Bidhan Khatiwada)
-- 075BCT020(Bijay Shrestha)
+- 075BCT001(Aaditya Subedi) @AadityaSubedi
+- 075BCT014(Arpan Gyawali) (@ArpanGyawali)
+- 075BCT018(Bidhan Khatiwada) [](localhost:5000)
+- 075BCT020(Bijay Shrestha) [](localhost:5000)
